@@ -1,20 +1,20 @@
 # YouTube Video Summarizer
 
-A modern web application that uses AI to generate concise summaries of YouTube videos. Built with Next.js and powered by Hugging Face's AI models.
+A web application that uses AI to generate simple summary of YouTube videos. Built with Next.js and powered by Hugging Face's AI models which are free to use.
 
 ## Features
 
-- 🎥 Summarize any YouTube video with English captions
-- 🤖 Powered by Hugging Face's BART model for high-quality summaries
-- 💻 Clean, modern UI with responsive design
-- ⚡ Fast and efficient processing
-- 🔍 Smart error handling and user feedback
+- Summarize any YouTube video with English captions
+- Powered by Hugging Face's BART model for awesome summaries
+-  Clean, modern UI with responsive design
+-  Fast and efficient processing
+-  Smart error handling and user feedback
 
 ## Prerequisites
 
-- Node.js 14.x or later
-- npm or yarn
-- A Hugging Face API key
+- Node.js 
+- npm or you can also use yarn
+- A Hugging Face API key (you can get it for free from hugging face site)
 
 ## Getting Started
 
@@ -56,8 +56,8 @@ yarn dev
 
 ## Important Notes
 
-- The video must have English captions available
-- You can check for captions by looking for the CC (Closed Captions) button in the YouTube player
+- video must have English captions available
+- You can check for captions by looking for the CC button in the YouTube 
 - Longer videos may take more time to process
 - The quality of the summary depends on the quality of the video's captions
 
@@ -65,19 +65,5 @@ yarn dev
 
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [Hugging Face](https://huggingface.co/) - AI models
+- [Hugging Face](https://huggingface.co/) - AI model
 - [youtube-captions-scraper](https://www.npmjs.com/package/youtube-captions-scraper) - Caption extraction
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Hugging Face for providing the AI models
-- YouTube for making captions available
-- The open-source community for their amazing tools and libraries 
