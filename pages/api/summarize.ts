@@ -16,7 +16,6 @@ export default async function handler(
   }
 
   try {
-    // Extract video ID from URL
     const videoId = extractVideoId(videoUrl);
     if (!videoId) {
       return res.status(400).json({ 
@@ -26,7 +25,6 @@ export default async function handler(
     }
 
     try {
-      // Get video captions
       const captions = await getSubtitles({
         videoID: videoId,
         lang: 'en'
@@ -39,10 +37,7 @@ export default async function handler(
         });
       }
 
-      // Combine all captions into a single text
       const fullText = captions.map(caption => caption.text).join(' ');
-
-      // Call Hugging Face API for summarization
       const summary = await summarizeWithHuggingFace(fullText);
 
       res.status(200).json({ summary });
@@ -81,7 +76,6 @@ function extractVideoId(url: string): string | null {
 }
 
 async function summarizeWithHuggingFace(text: string): Promise<string> {
-  // Using a more permissive model endpoint
   const API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
   const API_KEY = process.env.HUGGINGFACE_API_KEY;
 
@@ -90,7 +84,6 @@ async function summarizeWithHuggingFace(text: string): Promise<string> {
   }
 
   try {
-    // Split text into chunks if it's too long (BART has a max input length)
     const chunks = splitTextIntoChunks(text, 1024);
     const summaries = [];
 
@@ -131,7 +124,6 @@ async function summarizeWithHuggingFace(text: string): Promise<string> {
       summaries.push(result[0].summary_text);
     }
 
-    // Combine summaries if there were multiple chunks
     return summaries.length > 1 
       ? await combineSummaries(summaries)
       : summaries[0];
@@ -154,7 +146,6 @@ function splitTextIntoChunks(text: string, maxLength: number): string[] {
         chunks.push(currentChunk.trim());
         currentChunk = sentence;
       } else {
-        // If a single sentence is too long, split it by words
         const words = sentence.split(' ');
         let tempChunk = '';
         for (const word of words) {
@@ -182,14 +173,11 @@ function splitTextIntoChunks(text: string, maxLength: number): string[] {
 }
 
 async function combineSummaries(summaries: string[]): Promise<string> {
-  // If we have multiple summaries, combine them into a single coherent summary
   const combinedText = summaries.join(' ');
   
-  // If the combined text is short enough, return it directly
   if (combinedText.length <= 1024) {
     return combinedText;
   }
 
-  // Otherwise, summarize the combined summaries
   return summarizeWithHuggingFace(combinedText);
 } 

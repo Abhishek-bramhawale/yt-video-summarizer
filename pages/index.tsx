@@ -15,7 +15,6 @@ export default function Home() {
     setErrorDetails('');
     setSummary('');
 
-    // Basic URL validation
     if (!videoUrl.includes('youtube.com') && !videoUrl.includes('youtu.be')) {
       setError('Please enter a valid YouTube URL');
       setErrorDetails('The URL should be in one of these formats:\n• https://www.youtube.com/watch?v=VIDEO_ID\n• https://youtu.be/VIDEO_ID\n• https://youtube.com/shorts/VIDEO_ID');
@@ -51,26 +50,27 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen">
       <Head>
         <title>YouTube Video Summarizer</title>
         <meta name="description" content="Summarize YouTube videos using AI" />
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-2 text-gray-800">
+          <h1 className="font-display text-4xl font-bold text-center mb-2 text-primary-900">
             YouTube Video Summarizer
           </h1>
-          <p className="text-center text-gray-600 mb-8">
+          <p className="text-center text-secondary-600 mb-8 font-medium">
             Get AI-powered summaries of any YouTube video with English captions
           </p>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
-              <h2 className="text-lg font-semibold text-blue-800 mb-2">Important Note</h2>
-              <p className="text-blue-700">
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-soft p-6 mb-8">
+            <div className="mb-6 p-4 bg-primary-50/80 backdrop-blur-sm rounded-lg border border-primary-100">
+              <h2 className="text-lg font-semibold text-primary-800 mb-2">Important Note</h2>
+              <p className="text-primary-700">
                 This tool only works with YouTube videos that have English captions available.
                 You can check if a video has captions by looking for the CC (Closed Captions) button in the YouTube player.
               </p>
@@ -78,7 +78,7 @@ export default function Home() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="videoUrl" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="videoUrl" className="block text-sm font-medium text-secondary-700 mb-1">
                   YouTube Video URL
                 </label>
                 <input
@@ -86,11 +86,11 @@ export default function Home() {
                   id="videoUrl"
                   value={videoUrl}
                   onChange={(e) => setVideoUrl(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  className="w-full px-4 py-2 rounded-lg border border-secondary-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors text-secondary-900 placeholder-secondary-400 bg-white/90 backdrop-blur-sm"
                   placeholder="https://www.youtube.com/watch?v=..."
                   required
                 />
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-2 text-sm text-secondary-500">
                   Supported URL formats:
                   <br />
                   • https://www.youtube.com/watch?v=VIDEO_ID
@@ -104,7 +104,7 @@ export default function Home() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
               >
                 {loading ? (
                   <span className="flex items-center justify-center">
@@ -121,7 +121,7 @@ export default function Home() {
             </form>
 
             {error && (
-              <div className="mt-6 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100">
+              <div className="mt-6 p-4 bg-red-50/80 backdrop-blur-sm text-red-700 rounded-lg border border-red-100">
                 <p className="font-medium">{error}</p>
                 {errorDetails && (
                   <p className="mt-2 text-sm whitespace-pre-line">{errorDetails}</p>
@@ -131,15 +131,15 @@ export default function Home() {
 
             {summary && (
               <div className="mt-6">
-                <h2 className="text-xl font-semibold mb-3 text-gray-800">Summary</h2>
-                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">{summary}</p>
+                <h2 className="text-xl font-semibold mb-3 text-primary-900">Summary</h2>
+                <div className="bg-secondary-50/80 backdrop-blur-sm p-4 rounded-lg border border-secondary-200">
+                  <p className="text-secondary-700 whitespace-pre-wrap leading-relaxed">{summary}</p>
                 </div>
               </div>
             )}
           </div>
 
-          <footer className="text-center text-gray-500 text-sm">
+          <footer className="text-center text-secondary-500 text-sm">
             <p>Built with Next.js and Hugging Face AI</p>
           </footer>
         </div>
